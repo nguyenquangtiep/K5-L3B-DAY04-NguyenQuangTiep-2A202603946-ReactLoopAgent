@@ -1,0 +1,248 @@
+{
+  "summary": {
+    "total_cases": 1,
+    "scored_cases": 1,
+    "unscored_cases": 0,
+    "score_0_100": 10.0,
+    "partial_mean_0_100": null,
+    "bonus_points_0_15": null
+  },
+  "config": {
+    "provider": "openrouter",
+    "model": "openai/gpt-4o-mini",
+    "judge_provider": "openrouter",
+    "judge_model": "openai/gpt-4o-mini",
+    "max_steps": 16,
+    "dataset": "bonus"
+  },
+  "cases": [
+    {
+      "id": "B3",
+      "question": "Kiểm tra trạng thái Vercel hiện tại theo snapshot. Nếu gặp rate limit, thử lại có giới hạn và cho biết kết quả cùng nguồn.",
+      "expected": "Lần đầu get_vercel_status trả 429 giả lập, lần sau thành công none/All Systems Operational. Nêu timestamp và nguồn; không coi 429 là outage Vercel.",
+      "scenario": "rate_limit_once",
+      "provider": "openrouter",
+      "model": "openai/gpt-4o-mini",
+      "judge_provider": "openrouter",
+      "judge_model": "openai/gpt-4o-mini",
+      "result": {
+        "status": "completed",
+        "answer": "Trạng thái hiện tại của Vercel như sau:\n\n- **Tình trạng tổng thể**: Tất cả hệ thống đang hoạt động bình thường (\"All Systems Operational\").\n- **Thời gian ghi nhận**: 2026-11-10T14:45:50.457875+00:00.\n\n### Các sự cố gần đây đã được giải quyết:\n1. **Tên**: Build delays and degraded Vercel Dashboard performance\n   - **Trạng thái**: Đã giải quyết\n   - **Cập nhật lần cuối**: 2026-11-05T18:50:23.139Z\n   - **ID sự cố**: w661l7k3kf4p\n\n2. **Tên**: Delays in Logs and Observability data\n   - **Trạng thái**: Đã giải quyết\n   - **Cập nhật lần cuối**: 2026-10-23T17:32:46.920Z\n   - **ID sự cố**: 4lgcbsr7l8xn\n\n3. **Tên**: Increased build and deployment failures\n   - **Trạng thái**: Đã giải quyết\n   - **Cập nhật lần cuối**: 2026-10-12T20:11:12.802Z\n   - **ID sự cố**: sps6n39gm4sg\n\n4. **Tên**: Delays in Drains, Observability, and Workflow in Washington (iad1)\n   - **Trạng thái**: Đã giải quyết\n   - **Cập nhật lần cuối**: 2026-10-10T01:37:00.920Z\n   - **ID sự cố**: bpzq72pgngc7\n\n5. **Tên**: Vercel Auth login failures for pages with Deployment Protection enabled\n   - **Trạng thái**: Đã giải quyết\n   - **Cập nhật lần cuối**: 2026-10-06T16:26:49.403Z\n   - **ID sự cố**: 1dp8c0nfchtg\n\n6. **Tên**: Elevated Sandbox error rates in Paris (cdg1)\n   - **Trạng thái**: Đã giải quyết\n   - **Cập nhật lần cuối**: 2026-10-06T09:36:55.249Z\n   - **ID sự cố**: xr8lx0kncx0g\n\n7. **Tên**: Build failures and 500 errors for functions using Edge runtime\n   - **Trạng thái**: Đã giải quyết\n   - **Cập nhật lần cuối**: 2026-09-28T14:11:29.973Z\n   - **ID sự cố**: yy1sm6x5l83q\n\n8. **Tên**: Deployment stuck in initializing state\n   - **Trạng thái**: Đã giải quyết\n   - **Cập nhật lần cuối**: 2026-09-18T22:31:22.780Z\n   - **ID sự cố**: 5c1lswm68bkg\n\n**Nguồn**: [Vercel Status](https://www.vercel-status.com)",
+        "trace": [
+          {
+            "event": "model",
+            "step": 1,
+            "finish": "tool_calls"
+          },
+          {
+            "event": "tool",
+            "step": 1,
+            "name": "get_vercel_status",
+            "arguments": {},
+            "result": {
+              "ok": false,
+              "error": "RATE_LIMITED",
+              "http_status": 429,
+              "retry_after_seconds": 0,
+              "retriable": true,
+              "message": "429 giả lập; retry có giới hạn."
+            }
+          },
+          {
+            "event": "model",
+            "step": 2,
+            "finish": "tool_calls"
+          },
+          {
+            "event": "tool",
+            "step": 2,
+            "name": "get_vercel_status",
+            "arguments": {},
+            "result": {
+              "provider": "vercel",
+              "captured_at": "2026-11-10T14:45:50.457875+00:00",
+              "overall": {
+                "indicator": "none",
+                "description": "All Systems Operational"
+              },
+              "components": [],
+              "incidents": [
+                {
+                  "id": "w661l7k3kf4p",
+                  "name": "Build delays and degraded Vercel Dashboard performance",
+                  "status": "resolved",
+                  "updated_at": "2026-11-05T18:50:23.139Z"
+                },
+                {
+                  "id": "4lgcbsr7l8xn",
+                  "name": "Delays in Logs and Observability data",
+                  "status": "resolved",
+                  "updated_at": "2026-10-23T17:32:46.920Z"
+                },
+                {
+                  "id": "sps6n39gm4sg",
+                  "name": "Increased build and deployment failures",
+                  "status": "resolved",
+                  "updated_at": "2026-10-12T20:11:12.802Z"
+                },
+                {
+                  "id": "bpzq72pgngc7",
+                  "name": "Delays in Drains, Observability, and Workflow in Washington (iad1)",
+                  "status": "resolved",
+                  "updated_at": "2026-10-10T01:37:00.920Z"
+                },
+                {
+                  "id": "1dp8c0nfchtg",
+                  "name": "Vercel Auth login failures for pages with Deployment Protection enabled",
+                  "status": "resolved",
+                  "updated_at": "2026-10-06T16:26:49.403Z"
+                },
+                {
+                  "id": "xr8lx0kncx0g",
+                  "name": "Elevated Sandbox error rates in Paris (cdg1)",
+                  "status": "resolved",
+                  "updated_at": "2026-10-06T09:36:55.249Z"
+                },
+                {
+                  "id": "yy1sm6x5l83q",
+                  "name": "Build failures and 500 errors for functions using Edge runtime",
+                  "status": "resolved",
+                  "updated_at": "2026-09-28T14:11:29.973Z"
+                },
+                {
+                  "id": "5c1lswm68bkg",
+                  "name": "Deployment stuck in initializing state",
+                  "status": "resolved",
+                  "updated_at": "2026-09-18T22:31:22.780Z"
+                }
+              ],
+              "match_count": 50,
+              "returned": 8,
+              "note": "Chỉ tìm trong response incidents đã lấy; danh sách trả về tối đa 8 mục.",
+              "source": "https://www.vercel-status.com"
+            }
+          },
+          {
+            "event": "model",
+            "step": 3,
+            "finish": "stop"
+          }
+        ],
+        "usage": [
+          {
+            "prompt_tokens": 489,
+            "completion_tokens": 12,
+            "total_tokens": 501,
+            "cost": 8.055e-05,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 8.055e-05,
+              "upstream_inference_prompt_cost": 7.335e-05,
+              "upstream_inference_completions_cost": 7.2e-06
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          {
+            "prompt_tokens": 560,
+            "completion_tokens": 12,
+            "total_tokens": 572,
+            "cost": 9.12e-05,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 9.12e-05,
+              "upstream_inference_prompt_cost": 8.4e-05,
+              "upstream_inference_completions_cost": 7.2e-06
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          {
+            "prompt_tokens": 1130,
+            "completion_tokens": 691,
+            "total_tokens": 1821,
+            "cost": 0.0005841,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.0005841,
+              "upstream_inference_prompt_cost": 0.0001695,
+              "upstream_inference_completions_cost": 0.0004146
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          }
+        ]
+      },
+      "grade": {
+        "score": 10,
+        "raw_judge_score": 10,
+        "dimensions": {
+          "factuality": 0,
+          "completeness": 10,
+          "evidence": 0,
+          "boundaries": 0
+        },
+        "status": "scored",
+        "reason": "Trả lời không chính xác vì chưa thể hiện đầy đủ thông tin về việc gặp rate limit và việc thử lại. Dữ liệu trả về không phù hợp với expected.",
+        "improvement": "Cần báo cáo đúng về tình trạng rate limit khi lần gọi đầu tiên, sau đó báo cáo kết quả chính xác của lần gọi thứ hai.",
+        "mechanical": {
+          "violations": [],
+          "score_cap": 100,
+          "tool_calls": 2,
+          "tool_steps": 2
+        },
+        "judge_usage": {
+          "prompt_tokens": 1903,
+          "completion_tokens": 112,
+          "total_tokens": 2015,
+          "cost": 0.00035265,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "cache_write_tokens": 0,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.00035265,
+            "upstream_inference_prompt_cost": 0.00028545,
+            "upstream_inference_completions_cost": 6.72e-05
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "image_tokens": 0,
+            "audio_tokens": 0
+          }
+        },
+        "judge_trace_truncated": false
+      }
+    }
+  ]
+}

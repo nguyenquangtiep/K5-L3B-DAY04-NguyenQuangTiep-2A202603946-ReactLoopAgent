@@ -1,0 +1,318 @@
+{
+  "summary": {
+    "total_cases": 1,
+    "scored_cases": 1,
+    "unscored_cases": 0,
+    "score_0_100": 100.0,
+    "partial_mean_0_100": null,
+    "bonus_points_0_15": null
+  },
+  "config": {
+    "provider": "openrouter",
+    "model": "openai/gpt-4o-mini",
+    "judge_provider": "openrouter",
+    "judge_model": "openai/gpt-4o-mini",
+    "max_steps": 16,
+    "dataset": "bonus"
+  },
+  "cases": [
+    {
+      "id": "B2",
+      "question": "Tra timeline Vercel incident sps6n39gm4sg: thông báo nào nói các build GitHub-connected vẫn lỗi do upstream? Theo dữ liệu bạn đọc, có thể xác nhận sự cố đó đang xảy ra không? Dẫn nguồn.",
+      "expected": "Incident resolved. Phải xem nhiều trang timeline: update offset 3 ngày 2026-10-12 16:10 UTC nói GitHub-connected builds vẫn lỗi do upstream GitHub và dẫn GitHub status; đây là incident lịch sử không khẳng định đang diễn ra; cite Vercel.",
+      "scenario": "normal",
+      "provider": "openrouter",
+      "model": "openai/gpt-4o-mini",
+      "judge_provider": "openrouter",
+      "judge_model": "openai/gpt-4o-mini",
+      "result": {
+        "status": "completed",
+        "answer": "Trong timeline của incident \"Increased build and deployment failures\" của Vercel (sps6n39gm4sg), đã có thông báo sau đây nói về các build liên kết với GitHub vẫn gặp lỗi do sự cố upstream:\n\n- **Ngày 12 tháng 10, 2026, 16:10**: \"Chúng tôi tiếp tục làm việc để sửa chữa. Do một sự cố upstream tại GitHub ([chi tiết](https://www.githubstatus.com/incidents/93njd414rpbx)), một số builds và deployments cho các dự án kết nối với GitHub vẫn đang gặp lỗi.\"\n\nSự cố này đã được xác nhận là đã **giải quyết** vào ngày 12 tháng 10, 2026, và trạng thái hiện tại không còn gặp phải vấn đề này nữa. Thông tin chi tiết có thể được tìm thấy [tại đây](https://stspg.io/cfrfjg8fqxfr).",
+        "trace": [
+          {
+            "event": "model",
+            "step": 1,
+            "finish": "tool_calls"
+          },
+          {
+            "event": "tool",
+            "step": 1,
+            "name": "get_incident_details",
+            "arguments": {
+              "provider": "vercel",
+              "incident_id": "sps6n39gm4sg"
+            },
+            "result": {
+              "ok": true,
+              "provider": "vercel",
+              "id": "sps6n39gm4sg",
+              "name": "Increased build and deployment failures",
+              "status": "resolved",
+              "created_at": "2026-10-12T13:35:07.398Z",
+              "updated_at": "2026-10-12T20:11:12.802Z",
+              "captured_at": "2026-11-10T14:45:50.457875+00:00",
+              "components": [
+                "Builds",
+                "Git Integrations"
+              ],
+              "updates": [
+                {
+                  "status": "resolved",
+                  "created_at": "2026-10-12T20:11:12.778Z",
+                  "body": "This incident has been resolved.",
+                  "truncated": false
+                },
+                {
+                  "status": "monitoring",
+                  "created_at": "2026-10-12T19:56:56.002Z",
+                  "body": "The backlog of deployment events has been processed. We will continue to monitor and provide additional updates as they become available.",
+                  "truncated": false
+                }
+              ],
+              "offset": 0,
+              "total_updates": 7,
+              "next_offset": 2,
+              "url": "https://stspg.io/cfrfjg8fqxfr"
+            }
+          },
+          {
+            "event": "model",
+            "step": 2,
+            "finish": "tool_calls"
+          },
+          {
+            "event": "tool",
+            "step": 2,
+            "name": "get_incident_details",
+            "arguments": {
+              "provider": "vercel",
+              "incident_id": "sps6n39gm4sg",
+              "offset": 2
+            },
+            "result": {
+              "ok": true,
+              "provider": "vercel",
+              "id": "sps6n39gm4sg",
+              "name": "Increased build and deployment failures",
+              "status": "resolved",
+              "created_at": "2026-10-12T13:35:07.398Z",
+              "updated_at": "2026-10-12T20:11:12.802Z",
+              "captured_at": "2026-11-10T14:45:50.457875+00:00",
+              "components": [
+                "Builds",
+                "Git Integrations"
+              ],
+              "updates": [
+                {
+                  "status": "identified",
+                  "created_at": "2026-10-12T18:33:36.004Z",
+                  "body": "Deployment events, such as updating the deployment status on pull requests, are delayed and the backlog is being processed. We will provide additional updates as they become available.",
+                  "truncated": false
+                },
+                {
+                  "status": "identified",
+                  "created_at": "2026-10-12T16:10:48.923Z",
+                  "body": "We are continuing to work on a fix. Due to an upstream incident at GitHub (https://www.githubstatus.com/incidents/93njd414rpbx), some builds and deployments for GitHub-connected projects are still failing. We will provide additional updates as they become available.",
+                  "truncated": false
+                }
+              ],
+              "offset": 2,
+              "total_updates": 7,
+              "next_offset": 4,
+              "url": "https://stspg.io/cfrfjg8fqxfr"
+            }
+          },
+          {
+            "event": "model",
+            "step": 3,
+            "finish": "tool_calls"
+          },
+          {
+            "event": "tool",
+            "step": 3,
+            "name": "get_incident_details",
+            "arguments": {
+              "provider": "vercel",
+              "incident_id": "sps6n39gm4sg",
+              "offset": 4
+            },
+            "result": {
+              "ok": true,
+              "provider": "vercel",
+              "id": "sps6n39gm4sg",
+              "name": "Increased build and deployment failures",
+              "status": "resolved",
+              "created_at": "2026-10-12T13:35:07.398Z",
+              "updated_at": "2026-10-12T20:11:12.802Z",
+              "captured_at": "2026-11-10T14:45:50.457875+00:00",
+              "components": [
+                "Builds",
+                "Git Integrations"
+              ],
+              "updates": [
+                {
+                  "status": "identified",
+                  "created_at": "2026-10-12T14:57:41.585Z",
+                  "body": "Build and deployment failure rates have decreased, but some builds remain queued and are taking longer to start. We are continuing to work on a fix. We will provide additional updates as they become available.",
+                  "truncated": false
+                },
+                {
+                  "status": "identified",
+                  "created_at": "2026-10-12T14:08:54.967Z",
+                  "body": "We have identified the issue and are working on a fix. We will provide additional updates as they become available.",
+                  "truncated": false
+                }
+              ],
+              "offset": 4,
+              "total_updates": 7,
+              "next_offset": 6,
+              "url": "https://stspg.io/cfrfjg8fqxfr"
+            }
+          },
+          {
+            "event": "model",
+            "step": 4,
+            "finish": "stop"
+          }
+        ],
+        "usage": [
+          {
+            "prompt_tokens": 509,
+            "completion_tokens": 29,
+            "total_tokens": 538,
+            "cost": 9.375e-05,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 9.375e-05,
+              "upstream_inference_prompt_cost": 7.635e-05,
+              "upstream_inference_completions_cost": 1.74e-05
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          {
+            "prompt_tokens": 816,
+            "completion_tokens": 33,
+            "total_tokens": 849,
+            "cost": 0.0001422,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.0001422,
+              "upstream_inference_prompt_cost": 0.0001224,
+              "upstream_inference_completions_cost": 1.98e-05
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          {
+            "prompt_tokens": 1187,
+            "completion_tokens": 33,
+            "total_tokens": 1220,
+            "cost": 0.00019785,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.00019785,
+              "upstream_inference_prompt_cost": 0.00017805,
+              "upstream_inference_completions_cost": 1.98e-05
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          {
+            "prompt_tokens": 1529,
+            "completion_tokens": 200,
+            "total_tokens": 1729,
+            "cost": 0.00026295,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 1152,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.00026295,
+              "upstream_inference_prompt_cost": 0.00014295,
+              "upstream_inference_completions_cost": 0.00012
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          }
+        ]
+      },
+      "grade": {
+        "score": 100,
+        "raw_judge_score": 100,
+        "dimensions": {
+          "factuality": 40,
+          "completeness": 25,
+          "evidence": 20,
+          "boundaries": 15
+        },
+        "status": "scored",
+        "reason": "Câu trả lời đã xác nhận được thông tin chính xác về sự cố từ Vercel và đã chỉ ra nguồn đầy đủ. Tuy nhiên, việc khẳng định rằng sự cố không còn xảy ra bây giờ mâu thuẫn với tính chất của thông tin yêu cầu.",
+        "improvement": "Nên chỉ rõ rằng sự cố đã được giải quyết và không khẳng định trạng thái hiện tại một cách chắc chắn nếu không có bằng chứng xác thực.",
+        "mechanical": {
+          "violations": [],
+          "score_cap": 100,
+          "tool_calls": 3,
+          "tool_steps": 3
+        },
+        "judge_usage": {
+          "prompt_tokens": 1867,
+          "completion_tokens": 136,
+          "total_tokens": 2003,
+          "cost": 0.00036165,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "cache_write_tokens": 0,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.00036165,
+            "upstream_inference_prompt_cost": 0.00028005,
+            "upstream_inference_completions_cost": 8.16e-05
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "image_tokens": 0,
+            "audio_tokens": 0
+          }
+        },
+        "judge_trace_truncated": false
+      }
+    }
+  ]
+}
