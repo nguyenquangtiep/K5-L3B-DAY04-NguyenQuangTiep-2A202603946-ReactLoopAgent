@@ -36,6 +36,7 @@ def run_agent(question, provider, tools, max_steps=6):
     ]
     trace = []
     usage = []
+    incident_urls = set()
 
     for step in range(1, max_steps+1):
         try:
@@ -93,6 +94,13 @@ def run_agent(question, provider, tools, max_steps=6):
             else:
                 result = tools.execute(call["name"], arguments)
 
+            if (
+                call["name"] == "get_incident_details"
+                and result.get("ok") is True
+                and result.get("url")
+            ):
+                incident_urls.add(result["url"])
+
             trace.append({
                 "event": "tool",
                 "step": step,
@@ -108,11 +116,29 @@ def run_agent(question, provider, tools, max_steps=6):
             })
 
         if response["finish"] == "stop" and not response["calls"]:
+            answer = response["message"].get("content") or ""
+
+            if incident_urls and not any(url in answer for url in incident_urls):
+                trace.append({
+                    "event": "validation_missing_source",
+                    "step": step,
+                })
+
+                messages.append({
+                    "role": "user",
+                    "content": (
+                        "Câu trả lời thiếu nguồn incident đã kiểm tra. "
+                        "Hãy sửa câu trả lời và dẫn ít nhất một URL sau: "
+                        + ", ".join(sorted(incident_urls))
+                    ),
+                })
+                continue
+
             return {
                 "status": "completed",
-                "answer": response["message"].get("content") or "",
+                "answer": answer,
                 "trace": trace,
-                "usage": usage
+                "usage": usage,
             }
 
     return {
